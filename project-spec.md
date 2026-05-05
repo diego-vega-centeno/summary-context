@@ -162,7 +162,8 @@ Last activity: 3 people discussed token expiry approach
 
 ### General Layout
 Fixed sidenav on the left, main content on the right.
-Component library: shadcn/ui (clean, modern, dark/light theme built in)
+Component library: lucide-react (clean, modern)
+dark/light theme: next-themes
 
 ### Sidenav
 - Dashboard
