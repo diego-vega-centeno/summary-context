@@ -113,7 +113,7 @@ export default function LandingPage() {
               },
             ].map((item) => (
               <div key={item.title} className="flex flex-col gap-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-highlight">
                   {item.icon}
                 </div>
                 <h3
@@ -166,7 +166,7 @@ export default function LandingPage() {
               ].map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs px-2 py-0.5 rounded-full text-muted-foreground"
+                  className="text-xs px-2 py-0.5 rounded-full text-muted-foreground bg-muted-background"
                 >
                   {tag}
                 </span>
