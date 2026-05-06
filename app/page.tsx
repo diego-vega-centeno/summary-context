@@ -1,11 +1,5 @@
 "use client";
-// import { useNavigate } from "react-router";
-// import { Button } from "../components/ui/button";
-// import Button from '@/components/ui/Button'
-// import { Badge } from "../components/ui/badge";
 import {
-  GitPullRequest,
-  Sparkles,
   BookOpen,
   Users,
   ArrowRight,
@@ -151,7 +145,7 @@ export default function LandingPage() {
                   </p>
                 </div>
               </div>
-              {/* <Badge variant="destructive" className="text-xs">STALE 17d</Badge> */}
+              {<div className="text-xs py-2 px-3 rounded-full text-muted-foreground bg-muted-background">STALE 17d</div>}
             </div>
             <p className="text-md text-foreground mb-3">
               <span className="font-medium">Current status: </span>
@@ -185,10 +179,6 @@ export default function LandingPage() {
             &copy; Diego Vega Centeno
           </span>
         </div>
-        {/* <div className="flex items-center gap-1 text-sm text-muted-foreground">
-          <GitHubIcon className="w-4 h-4" />
-          <span>Public repos only · Free tier</span>
-        </div> */}
       </footer>
     </div>
   );
