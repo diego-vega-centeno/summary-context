@@ -11,34 +11,30 @@ import {
   ArrowRight,
   Clock,
   Zap,
+  Timeline,
 } from "lucide-react";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Button from "@/components/ui/Button";
 import { useRouter } from "next/navigation";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export default function LandingPage() {
   const router = useRouter();
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <header className="border-b border-border px-6 py-4 flex items-center justify-between">
+      <header className="border-b border-b-2 border-border px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-            <GitPullRequest className="w-4 h-4 text-primary-foreground" />
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+            <Timeline className="w-4 h-4" />
           </div>
           <span className="font-semibold text-foreground">Summary context</span>
         </div>
         <div className="flex items-center gap-3">
-          {/* <Button variant="ghost" onClick={() => navigate("/login")}>Sign in</Button> */}
-          <Button onClick={() => router.push("/dashboard")}>Get Started</Button>
+          <ThemeToggle />
         </div>
       </header>
 
       <main className="flex-1 flex flex-col items-center justify-center px-6 py-20 text-center">
-        {/* <Badge variant="secondary" className="mb-6 gap-1.5">
-          <Sparkles className="w-3 h-3" />
-          AI-powered development context
-        </Badge> */}
-
         <h1
           className="max-w-3xl mb-6 text-foreground"
           style={{ fontSize: "3rem", fontWeight: 700, lineHeight: 1.15 }}
@@ -62,39 +58,48 @@ export default function LandingPage() {
           className="max-w-xxl text-muted-foreground mb-10"
           style={{ fontSize: "1.125rem", lineHeight: 1.7 }}
         >
-          PR Context ingests your GitHub pull requests and reconstructs the
+          Summary context ingests your GitHub pull requests and reconstructs the
           development narrative
           <br />
           Who made decisions, what's blocking things, and exactly what needs to
-          happen next. Not just status. Context.
+          happen next. Not just status but the progress with context.
         </p>
 
         <div className="flex items-center gap-4">
-          {/* <Button size="lg" onClick={() => navigate("/signup")} className="gap-2">
+          <Button
+            size="lg"
+            onClick={() => router.push("/dashboard")}
+            className="gap-2"
+          >
             Get Started Free
             <ArrowRight className="w-4 h-4" />
-          </Button> */}
-          {/* <Button size="lg" variant="outline" onClick={() => navigate("/dashboard")} className="gap-2">
-            View Demo
-          </Button> */}
+          </Button>
+          <Button
+            size="lg"
+            onClick={() => router.push("/signup")}
+            className="gap-2"
+          >
+            Sign up
+          </Button>
         </div>
 
-        <p className="mt-4 text-sm text-muted-foreground">
-          Public GitHub repos only · No OAuth token required
+        <p className="mt-4 text-sm">
+          AI-powered development context · Public GitHub repos only · No OAuth
+          token required
         </p>
       </main>
 
       <section className="border-t border-border px-6 py-16">
         <div className="max-w-5xl mx-auto">
-          <p className="text-center text-sm text-muted-foreground mb-10 uppercase tracking-wider">
-            What PR Context does differently
+          <p className="text-center text-sm mb-10 uppercase tracking-wider">
+            What summary context helps you with
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
                 icon: <BookOpen className="w-5 h-5" />,
                 title: "The full story",
-                desc: "Chronological narrative of decisions, blockers, and context — not just a status badge.",
+                desc: "Chronological narrative of decisions, blockers, and context. Not just status flag",
               },
               {
                 icon: <Zap className="w-5 h-5" />,
@@ -103,15 +108,18 @@ export default function LandingPage() {
               },
               {
                 icon: <Users className="w-5 h-5" />,
-                title: "Team transparency",
-                desc: "Managers get the full picture without interrupting the developers building the thing.",
+                title: "Team efficiency",
+                desc: "Managers get the full picture without interrupting developers. When you need to ask now you now have a better understanding.",
               },
             ].map((item) => (
               <div key={item.title} className="flex flex-col gap-3">
-                <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center text-accent-foreground">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center">
                   {item.icon}
                 </div>
-                <h3 className="text-foreground" style={{ fontSize: "1rem" }}>
+                <h3
+                  className="text-foreground font-bold"
+                  style={{ fontSize: "1rem" }}
+                >
                   {item.title}
                 </h3>
                 <p
@@ -126,9 +134,9 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="border-t border-border px-6 py-16 bg-accent/30">
+      <section className="border-t border-border px-6 py-16 bg-foreground">
         <div className="max-w-2xl mx-auto">
-          <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
+          <div className="rounded-xl border p-6 shadow-sm bg-background">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded bg-orange-100 dark:bg-orange-950 flex items-center justify-center">
@@ -145,8 +153,8 @@ export default function LandingPage() {
               </div>
               {/* <Badge variant="destructive" className="text-xs">STALE 17d</Badge> */}
             </div>
-            <p className="text-sm text-foreground mb-3">
-              <span className="font-medium">AI says: </span>
+            <p className="text-md text-foreground mb-3">
+              <span className="font-medium">Current status: </span>
               Blocked waiting on @john decision about session handling
               architecture
             </p>
@@ -158,7 +166,7 @@ export default function LandingPage() {
               ].map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground"
+                  className="text-xs px-2 py-0.5 rounded-full text-muted-foreground"
                 >
                   {tag}
                 </span>
@@ -166,20 +174,21 @@ export default function LandingPage() {
             </div>
           </div>
           <p className="text-center text-xs text-muted-foreground mt-4">
-            Example PR card — AI reconstructs the blockers automatically
+            Example card — AI reconstructs the blockers automatically
           </p>
         </div>
       </section>
 
       <footer className="border-t border-border px-6 py-6 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <GitPullRequest className="w-4 h-4 text-muted-foreground" />
-          <span className="text-sm text-muted-foreground">PR Context</span>
+          <span className="text-sm text-muted-foreground">
+            &copy; Diego Vega Centeno
+          </span>
         </div>
-        <div className="flex items-center gap-1 text-sm text-muted-foreground">
+        {/* <div className="flex items-center gap-1 text-sm text-muted-foreground">
           <GitHubIcon className="w-4 h-4" />
           <span>Public repos only · Free tier</span>
-        </div>
+        </div> */}
       </footer>
     </div>
   );
