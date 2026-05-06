@@ -134,7 +134,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="border-t border-border px-6 py-16 bg-foreground">
+      <section className="border-t border-border px-6 py-16 bg-primary">
         <div className="max-w-2xl mx-auto">
           <div className="rounded-xl border p-6 shadow-sm bg-background">
             <div className="flex items-center justify-between mb-4">
@@ -181,7 +181,7 @@ export default function LandingPage() {
 
       <footer className="border-t border-border px-6 py-6 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-foreground">
             &copy; Diego Vega Centeno
           </span>
         </div>
