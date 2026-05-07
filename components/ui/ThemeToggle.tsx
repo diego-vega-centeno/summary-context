@@ -22,16 +22,21 @@ export function ThemeToggle({
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       className={clsx(
         "flex items-center justify-left whitespace-nowrap",
         className,
       )}
     >
       {theme === "dark" ? (
-        <Moon className="h-8 w-8 p-1 rounded-full hover:bg-foreground hover:text-background hover:cursor-pointer" />
+        <Moon
+          className="h-8 w-8 p-1 rounded-full hover:bg-foreground hover:text-background hover:cursor-pointer"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        />
       ) : (
-        <Sun className="h-8 w-8 p-1 rounded-full hover:bg-foreground hover:text-background hover:cursor-pointer" />
+        <Sun
+          className="h-8 w-8 p-1 rounded-full hover:bg-foreground hover:text-background hover:cursor-pointer"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        />
       )}
       {showLabels && (
         <span className="ml-2">
