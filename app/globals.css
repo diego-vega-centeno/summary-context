@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
 
 :root {
   --background: #ededed;
@@ -6,11 +7,11 @@
   --highlight: #a9a3a3;
   --primary: #0a0917;
   --secondary: #262626;
-  --muted-background: #8b8888;
+  --muted-background: #c2bdbd;
   --muted-foreground: #292121;
   --sidebar-background: #e0d9d9;
   --sidebar-foreground: #262626;
-  --border: #543a3a1a;
+  --border: #00000053;
   --warning: #be1a1a;
 }
 
@@ -22,7 +23,7 @@
   --secondary: #262626;
   --muted-background: #262626;
   --muted-foreground: #a1a1a1;
-  --border: #543a3a1a;
+  --border: oklch(0.269 0 0);
   --sidebar-background: #1f1e1e;
   --sidebar-foreground: #262626;
   --warning: #be1a1a;
