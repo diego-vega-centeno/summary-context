@@ -30,36 +30,28 @@ function StatsCard({
     >
       <div className="w-2/3">
         <div className="text-lg text-muted-foreground">{config.title}</div>
-        <div className="text-2xl">{value}</div>
+        <div className="text-xl">{value}</div>
       </div>
       <div
-        className={`w-10 h-10 flex items-center justify-center text-2xl ${config.color} bg-muted-background rounded-xl`}
+        className={`w-10 h-10 flex items-center justify-center ${config.color} bg-muted-background rounded-xl`}
       >
-        {<config.icon />}
+        {<config.icon className="w-1/2 h-1/2" />}
       </div>
     </div>
   );
 }
 
-function PRMiniCard({
-  title,
-  id,
-  current_state,
-  repo_name,
-}: {
-  title: string;
-  id: string;
-  current_state: string;
-  repo_name: string;
-}) {
+function PRMiniCard(pr: TrackedPRWithSummary) {
   return (
-    <div className="p-3">
-      <div className="text-bold">{title}</div>
-      <div className="text-muted-foreground">
-        <span>{id}</span>
-        <span>{repo_name}</span>
+    <div className="text-sm border-1 border-border rounded-lg p-3 hover:bg-hover hover:cursor-pointer">
+      <div className="font-medium text-foreground">{pr.title}</div>
+      <div className="text-muted-foreground pb-2">
+        <div className="py-2">{`#${pr.pr_number} - ${pr.repo_name}`}</div>
       </div>
-      <div>{current_state}</div>
+      <hr className="" />
+      <div className="text-muted-foreground pt-2">
+        {pr.summary?.summary_json.current_state}
+      </div>
     </div>
   );
 }
@@ -82,15 +74,15 @@ export default function Page() {
         <div className="grid md:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] grid-cols-2 gap-2">
           {(
             Object.keys(status_config) as Array<keyof typeof status_config>
-          ).map((type) => (
-            <div key={type}>
+          ).map((status) => (
+            <div key={status}>
               <StatsCard
                 value={
-                  type === "total"
+                  status === "total"
                     ? total_prs_length
-                    : getPRsByStatus(type).length
+                    : getPRsByStatus(status).length
                 }
-                config={status_config[type]}
+                config={status_config[status]}
               />
             </div>
           ))}
@@ -104,18 +96,8 @@ export default function Page() {
         <div className="grid md:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] grid-cols-2 gap-2">
           {columns.map(({ status, prs }) => (
             <div className={"flex flex-col gap-2"} key={status}>
-              {getPRsByStatus(status).map((pr) => (
-                <div className="text-sm border-1 border-border rounded-lg p-3 hover:bg-hover hover:cursor-pointer">
-                  <div className="font-medium text-foreground">{pr.title}</div>
-                  <div className="text-muted-foreground pb-2">
-                    <div className="py-2">{`#${pr.pr_number} - ${pr.repo_name}`}</div>
-                  </div>
-                  <hr className="" />
-                  <div className="text-muted-foreground pt-2">
-                    {pr.summary?.summary_json.current_state}
-                  </div>
-                </div>
-              ))}
+              <div className="border- rounded-md">{status}</div>
+              {getPRsByStatus(status).map((pr) => PRMiniCard(pr))}
             </div>
           ))}
         </div>
