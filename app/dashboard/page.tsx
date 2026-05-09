@@ -95,20 +95,25 @@ export default function Page() {
             </div>
           ))}
         </div>
-        <h2 className="py-8 max-w-xs text-3xl font-semibold leading-10 tracking-tight">
-          Status board<pan>click to view full story</pan>
+        <h2 className="pt-8 max-w-xs text-3xl font-semibold leading-10 tracking-tight">
+          Status board
         </h2>
+        <div className="py-4 text-sm text-muted-foreground">
+          click to view full story
+        </div>
         <div className="grid md:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] grid-cols-2 gap-2">
           {columns.map(({ status, prs }) => (
             <div className={"flex flex-col gap-2"} key={status}>
               {getPRsByStatus(status).map((pr) => (
-                <div className="text-sm border-1 border-border rounded-lg p-3">
+                <div className="text-sm border-1 border-border rounded-lg p-3 hover:bg-hover hover:cursor-pointer">
                   <div className="font-medium text-foreground">{pr.title}</div>
                   <div className="text-muted-foreground pb-2">
                     <div className="py-2">{`#${pr.pr_number} - ${pr.repo_name}`}</div>
                   </div>
-                  <hr className=""/>
-                  <div className="text-muted-foreground pt-2">{pr.summary?.summary_json.current_state}</div>
+                  <hr className="" />
+                  <div className="text-muted-foreground pt-2">
+                    {pr.summary?.summary_json.current_state}
+                  </div>
                 </div>
               ))}
             </div>
