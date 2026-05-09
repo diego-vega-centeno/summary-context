@@ -5,6 +5,7 @@ import {
   SquareDot,
   TriangleAlert,
 } from "lucide-react";
+import type { TrackedPRWithSummary } from "@/types/index.ts";
 
 const total_prs_length = dummyPRs.length;
 
@@ -40,6 +41,36 @@ function StatsCard({
   );
 }
 
+function PRMiniCard({
+  title,
+  id,
+  current_state,
+  repo_name,
+}: {
+  title: string;
+  id: string;
+  current_state: string;
+  repo_name: string;
+}) {
+  return (
+    <div className="p-3">
+      <div className="text-bold">{title}</div>
+      <div className="text-muted-foreground">
+        <span>{id}</span>
+        <span>{repo_name}</span>
+      </div>
+      <div>{current_state}</div>
+    </div>
+  );
+}
+
+const columns: { status: string; prs: TrackedPRWithSummary[] }[] = [
+  { status: "open", prs: getPRsByStatus("open") },
+  { status: "stale", prs: getPRsByStatus("stale") },
+  { status: "merged", prs: getPRsByStatus("merged") },
+  { status: "closed", prs: getPRsByStatus("closed") },
+];
+
 export default function Page() {
   return (
     <main className="flex flex-1 h-full w-full flex-col justify-between p-6 max-w-6xl mx-auto">
@@ -61,6 +92,25 @@ export default function Page() {
                 }
                 config={status_config[type]}
               />
+            </div>
+          ))}
+        </div>
+        <h2 className="py-8 max-w-xs text-3xl font-semibold leading-10 tracking-tight">
+          Status board<pan>click to view full story</pan>
+        </h2>
+        <div className="grid md:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] grid-cols-2 gap-2">
+          {columns.map(({ status, prs }) => (
+            <div className={"flex flex-col gap-2"} key={status}>
+              {getPRsByStatus(status).map((pr) => (
+                <div className="text-sm border-1 border-border rounded-lg p-3">
+                  <div className="font-medium text-foreground">{pr.title}</div>
+                  <div className="text-muted-foreground pb-2">
+                    <div className="py-2">{`#${pr.pr_number} - ${pr.repo_name}`}</div>
+                  </div>
+                  <hr className=""/>
+                  <div className="text-muted-foreground pt-2">{pr.summary?.summary_json.current_state}</div>
+                </div>
+              ))}
             </div>
           ))}
         </div>
