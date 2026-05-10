@@ -1,10 +1,10 @@
 "use client";
-import { status_data, prs } from "@/lib/data/status-data";
 import { type TrackedPRWithSummary, type PRStatus } from "@/types/index";
 import { Plus } from "lucide-react";
 import { useState } from "react";
+import { status_data, prs } from "@/lib/data/status-data";
 
-const columns = ["open", "stale", "merged", "closed"];
+const status = ["total", "open", "stale", "merged", "closed"];
 
 function PRMiniCard(pr: TrackedPRWithSummary) {
   return (
@@ -27,6 +27,7 @@ function PRMiniCard(pr: TrackedPRWithSummary) {
 export default function Page() {
   const [refreshing, setRefreshing] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [statusSelected, setStatusSelected] = useState("total");
 
   async function refreshPRs() {
     setRefreshing(true);
@@ -53,7 +54,7 @@ export default function Page() {
             Add PR
           </button>
         </div>
-        <div>
+        <div className="w-full flex gap-3">
           <input
             placeholder="Search PRs ..."
             className="w-3/8 bg-sidebar-background p-2 rounded-md text-sm"
@@ -61,6 +62,18 @@ export default function Page() {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
+          {status.map((status) => (
+            <div
+              className={`flex items-center gap-2 px-2 rounded-xl text-sm hover:cursor-pointer border-1 border-border font-semibold ${statusSelected === status ? "bg-white text-black" : "hover:bg-hover hover:text-white text-muted-foreground"}`}
+              key={status}
+              onClick={() => setStatusSelected(status)}
+            >
+              <span>{status}</span>
+              <div className="inline-flex items-center justify-center rounded-full bg-muted-background w-6 h-6 text-white text-xs ml-2">
+                {status_data[status as PRStatus].length}
+              </div>
+            </div>
+          ))}
         </div>
         <h2 className="pt-8 max-w-xs text-3xl font-semibold leading-10 tracking-tight">
           Status board
@@ -69,7 +82,7 @@ export default function Page() {
           click to view full story
         </div>
         <div className="grid md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] grid-cols-2 gap-2">
-          {columns.map((status) => (
+          {/* {columns.map((status) => (
             <div className={"flex flex-col gap-2"} key={status}>
               <div className="py-2">
                 <div
@@ -81,7 +94,7 @@ export default function Page() {
               </div>
               {prs[status as PRStatus].map((pr) => PRMiniCard(pr))}
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </main>
