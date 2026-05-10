@@ -20,7 +20,7 @@ const status_config = {
   open: {
     title: "open",
     icon: GitPullRequest,
-    color: "bg-green-700/50 darK:bg-green-700 border-green-700",
+    color: "bg-green-700/50 dark:bg-green-700 border-green-700",
   },
   merged: {
     title: "merged",
