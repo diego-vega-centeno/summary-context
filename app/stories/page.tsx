@@ -1,29 +1,10 @@
+"use client";
 import { status_data, prs } from "@/lib/data/status-data";
 import { type TrackedPRWithSummary, type PRStatus } from "@/types/index";
-
+import { Plus } from "lucide-react";
+import { useState } from "react";
 
 const columns = ["open", "stale", "merged", "closed"];
-
-function StatsCard({ status }: { status: PRStatus | "total" }) {
-  const IconComponent = status_data[status].icon;
-  return (
-    <div
-      className={`p-3 border-1 border-border rounded-lg flex items-center gap-2`}
-    >
-      <div className="w-2/3">
-        <div className="text-lg text-muted-foreground">
-          {status_data[status].title}
-        </div>
-        <div className="text-xl">{status_data[status].length}</div>
-      </div>
-      <div
-        className={`w-10 h-10 flex items-center justify-center ${status_data[status].color} bg-muted-background rounded-xl bg-border`}
-      >
-        {<IconComponent className="w-1/2 h-1/2" />}
-      </div>
-    </div>
-  );
-}
 
 function PRMiniCard(pr: TrackedPRWithSummary) {
   return (
@@ -44,23 +25,42 @@ function PRMiniCard(pr: TrackedPRWithSummary) {
 }
 
 export default function Page() {
+  const [refreshing, setRefreshing] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+
+  async function refreshPRs() {
+    setRefreshing(true);
+    await new Promise((r) => setTimeout(r, 2000));
+    setRefreshing(false);
+  }
   return (
     <main className="flex flex-1 flex-col justify-between p-6 max-w-6xl mx-auto">
       <div>
         <div className="flex justify-between items-center mb-3">
           <div>
             <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight">
-              Dashboard
+              Stories
             </h1>
             <h2 className="text-muted-foreground text-sm">Last synced</h2>
           </div>
+          <button
+            type="button"
+            className={`inline-flex items-center justify-center rounded-md text-foreground hover:bg-highlight hover:text-foreground h-8 px-2 border-1 border-border ${refreshing ? "opacity-50 cursor-not-allowed" : ""}`}
+            disabled={refreshing}
+            onClick={refreshPRs}
+          >
+            <Plus className="h-2/3 mr-1" />
+            Add PR
+          </button>
         </div>
-        <div className="grid md:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] grid-cols-2 gap-2">
-          {columns.map((status) => (
-            <div key={status}>
-              <StatsCard status={status as PRStatus | "total"} />
-            </div>
-          ))}
+        <div>
+          <input
+            placeholder="Search PRs ..."
+            className="w-3/8 bg-sidebar-background py-1 px-2 rounded-md"
+            type="text"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
         </div>
         <h2 className="pt-8 max-w-xs text-3xl font-semibold leading-10 tracking-tight">
           Status board
