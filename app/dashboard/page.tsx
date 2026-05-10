@@ -35,7 +35,7 @@ function PRMiniCard(pr: TrackedPRWithSummary) {
     >
       <div className="font-medium text-foreground">{pr.title}</div>
       <div className="text-muted-foreground pb-2">
-        <div className="py-2">{`#${pr.pr_number} - ${pr.repo_name}`}</div>
+        <div className="pt-2">{`#${pr.pr_number} - ${pr.repo_name}`}</div>
       </div>
       <hr className="" />
       <div className="text-muted-foreground pt-2">
