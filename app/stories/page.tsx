@@ -56,7 +56,7 @@ export default function Page() {
         <div>
           <input
             placeholder="Search PRs ..."
-            className="w-3/8 bg-sidebar-background py-1 px-2 rounded-md"
+            className="w-3/8 bg-sidebar-background p-2 rounded-md text-sm"
             type="text"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
