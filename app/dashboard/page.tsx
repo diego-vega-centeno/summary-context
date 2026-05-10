@@ -128,7 +128,7 @@ export default function Page() {
         <div className="py-4 text-sm text-muted-foreground">
           click to view full story
         </div>
-        <div className="grid md:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] grid-cols-2 gap-2">
+        <div className="grid md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] grid-cols-2 gap-2">
           {columns.map(
             ({
               status,
@@ -138,7 +138,7 @@ export default function Page() {
               prs: TrackedPRWithSummary[];
             }) => (
               <div className={"flex flex-col gap-2"} key={status}>
-                <div className="pb-2">
+                <div className="py-2">
                   <div
                     className={`inline-block border-1 rounded-xl ${status_config[status].color} px-3 py-1 text-sm`}
                   >
