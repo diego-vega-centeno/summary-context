@@ -6,7 +6,6 @@ import { status_data, prs, formatRelativeDate } from "@/lib/data/status-data";
 import { dummyPRs } from "@/lib/data/dummy-data";
 
 const status = ["total", "open", "stale", "merged", "closed"];
-const now = new Date();
 
 function PRCard(pr: TrackedPRWithSummary) {
   const IconComponent = status_data[pr.status].icon;
