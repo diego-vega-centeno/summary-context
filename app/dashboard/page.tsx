@@ -1,65 +1,10 @@
 "use client";
-import { getPRsByStatus, dummyPRs } from "@/lib/data/dummy-data";
-import {
-  GitPullRequest,
-  GitMerge,
-  SquareDot,
-  TriangleAlert,
-  RefreshCw,
-} from "lucide-react";
-import { type TrackedPRWithSummary, type PRStatus } from "@/types/index";
-import Button from "@/components/ui/Button";
+import { RefreshCw } from "lucide-react";
 import { useState } from "react";
+import { status_data, prs } from "@/lib/data/status-data";
+import { type TrackedPRWithSummary, type PRStatus } from "@/types/index";
 
 const columns = ["open", "stale", "merged", "closed"];
-
-const prs = {
-  open: getPRsByStatus("open"),
-  merged: getPRsByStatus("merged"),
-  closed: getPRsByStatus("closed"),
-  stale: getPRsByStatus("stale"),
-};
-
-const status_data: Record<
-  PRStatus | "total",
-  {
-    title: string;
-    icon: React.ComponentType<any>;
-    color: string;
-    length: number;
-  }
-> = {
-  total: {
-    title: "total",
-    icon: GitPullRequest,
-    color: "bg-grey-700/50 dark:bg-grey-700 border-grey-700",
-    length: dummyPRs.length,
-  },
-  open: {
-    title: "open",
-    icon: GitPullRequest,
-    color: "bg-green-700/50 dark:bg-green-700 border-green-700",
-    length: prs["open"].length,
-  },
-  merged: {
-    title: "merged",
-    icon: GitMerge,
-    color: "bg-purple-700/50 dark:bg-purple-700 border-purple-700",
-    length: prs["merged"].length,
-  },
-  closed: {
-    title: "closed",
-    icon: SquareDot,
-    color: "bg-grey-700/50  dark:bg-grey-700 border-grey-700",
-    length: prs["closed"].length,
-  },
-  stale: {
-    title: "stale",
-    icon: TriangleAlert,
-    color: "bg-yellow-700/50 dark:bg-yellow-700 border-yellow-700",
-    length: prs["stale"].length,
-  },
-};
 
 function StatsCard({ status }: { status: PRStatus | "total" }) {
   const IconComponent = status_data[status].icon;
