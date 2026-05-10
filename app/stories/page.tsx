@@ -1,11 +1,12 @@
 "use client";
 import { type TrackedPRWithSummary, type PRStatus } from "@/types/index";
-import { Plus } from "lucide-react";
+import { Plus, Clock } from "lucide-react";
 import { useState } from "react";
-import { status_data, prs } from "@/lib/data/status-data";
+import { status_data, prs, formatRelativeDate } from "@/lib/data/status-data";
 import { dummyPRs } from "@/lib/data/dummy-data";
 
 const status = ["total", "open", "stale", "merged", "closed"];
+const now = new Date();
 
 function PRCard(pr: TrackedPRWithSummary) {
   const IconComponent = status_data[pr.status].icon;
@@ -21,12 +22,16 @@ function PRCard(pr: TrackedPRWithSummary) {
         <span>{pr.status}</span>
       </div>
       <div className="font-medium text-foreground">{pr.title}</div>
-      <div className="text-muted-foreground pb-2">
-        <div className="py-2">{`#${pr.pr_number} - ${pr.repo_name}`}</div>
+      <div className="">
+        <div className="py-2 text-muted-foreground">{`${pr.repo_owner}/${pr.repo_name} \u00B7 #${pr.pr_number} \u00B7 ${pr.author}`}</div>
       </div>
-      <hr className="" />
-      <div className="text-muted-foreground pt-2">
+      <div className="text-foreground py-2">
         {pr.summary?.summary_json.current_state}
+      </div>
+      <hr className="border-border" />
+      <div className="flex items-center pt-2 text-xs text-muted-foreground">
+        <Clock className="inline-block mr-2 w-4" />
+        <span>Last activity {formatRelativeDate(pr.last_activity_at)}</span>
       </div>
     </div>
   );
@@ -53,7 +58,7 @@ export default function Page() {
   }
 
   return (
-    <main className="flex flex-1 flex-col justify-between p-6 max-w-6xl mx-auto">
+    <main className="flex flex-1 flex-col justify-between p-6 px-20 max-w-6xl mx-auto">
       <div>
         <div className="flex justify-between items-center mb-3">
           <div>
@@ -93,7 +98,7 @@ export default function Page() {
             </div>
           ))}
         </div>
-        <div className="grid md:grid-cols-2 grid-cols-2 gap-2">
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-2">
           {selectedPRs.map((pr) => (
             <div className={"flex flex-col gap-2"} key={pr.id}>
               {PRCard(pr)}
