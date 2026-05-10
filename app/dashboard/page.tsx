@@ -120,7 +120,8 @@ export default function Page() {
             <h2 className="text-muted-foreground text-sm">Last synced</h2>
           </div>
           <button
-            className="inline-flex items-center justify-center rounded-md text-foreground hover:bg-highlight hover:text-foreground h-8 px-2 border-1 border-border"
+            type="button"
+            className={`inline-flex items-center justify-center rounded-md text-foreground hover:bg-highlight hover:text-foreground h-8 px-2 border-1 border-border ${refreshing ? "opacity-50 cursor-not-allowed" : ""}`}
             disabled={refreshing}
             onClick={refreshPRs}
           >
