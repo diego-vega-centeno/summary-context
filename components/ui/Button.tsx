@@ -19,7 +19,7 @@ const buttonVariants = cva(
       },
       disabled: {
         false: null,
-        true: "opacity-50 cursor-not-allowed",
+        true: "opacity-50",
       },
       border: {
         true: "border-1 border-border",
@@ -45,11 +45,12 @@ export default function Button({
   size,
   className,
   border,
+  disabled,
   icon: Icon,
   href,
   ...props
 }: ButtonProps) {
-  const _className = buttonVariants({ variant, size, className, border });
+  const _className = buttonVariants({ variant, size, className, border,disabled });
 
   if (href) {
     return (
