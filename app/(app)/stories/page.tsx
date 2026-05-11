@@ -12,7 +12,13 @@ import { dummyPRs } from "@/lib/data/dummy-data";
 
 const status = ["total", "open", "stale", "merged", "closed"];
 
-function PRCard(pr: TrackedPRWithSummary) {
+interface PRCardProps {
+  pr: TrackedPRWithSummary;
+  refreshingPR: string | null;
+  refreshPR: (id: string) => Promise<void>;
+}
+
+function PRCard({ pr, refreshingPR, refreshPR }: PRCardProps) {
   const IconComponent = status_data[pr.status].icon;
   return (
     <div
@@ -27,7 +33,16 @@ function PRCard(pr: TrackedPRWithSummary) {
           <span>{pr.status}</span>
         </div>
         <div>
-          <RefreshCw className="w-8 h-8 p-2 hover:bg-highlight rounded-full" />
+          <button
+            aria-label={`Refresh PR ${pr.pr_number}`}
+            disabled={refreshingPR === pr.id}
+            onClick={() => refreshPR(pr.id)}
+            className={`hover:bg-highlight rounded-full p-1.5 ${refreshingPR === pr.id ? "opacity-50 cursor-not-allowed" : ""}`}
+          >
+            <RefreshCw
+              className={`w-4 h-4 ${refreshingPR === pr.id ? "animate-spin" : ""}`}
+            />
+          </button>
         </div>
       </div>
       <div className="font-medium text-foreground">{pr.title}</div>
@@ -47,7 +62,7 @@ function PRCard(pr: TrackedPRWithSummary) {
 }
 
 export default function Page() {
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshingPR, setRefreshingPR] = useState<null | string>(null);
   const [searchInput, setSearchInput] = useState("");
   const [statusSelected, setStatusSelected] = useState<PRStatus | "total">(
     "total",
@@ -69,10 +84,14 @@ export default function Page() {
     return basePRs;
   }, [statusSelected, debouncedSearchInput]);
 
-  async function refreshPRs() {
-    setRefreshing(true);
+  async function addPR() {
+    console.log("add PR");
+  }
+
+  async function refreshPR(id: string) {
+    setRefreshingPR(id);
     await new Promise((r) => setTimeout(r, 2000));
-    setRefreshing(false);
+    setRefreshingPR(null);
   }
 
   return (
@@ -87,9 +106,8 @@ export default function Page() {
           </div>
           <button
             type="button"
-            className={`inline-flex items-center justify-center rounded-md text-foreground hover:bg-highlight hover:text-foreground h-8 px-2 border-1 border-border ${refreshing ? "opacity-50 cursor-not-allowed" : ""}`}
-            disabled={refreshing}
-            onClick={refreshPRs}
+            className={`inline-flex items-center justify-center rounded-md text-foreground hover:bg-highlight hover:text-foreground h-8 px-2 border-1 border-border`}
+            onClick={addPR}
           >
             <Plus className="h-2/3 mr-1" />
             Add PR
@@ -119,7 +137,11 @@ export default function Page() {
         <div className="grid md:grid-cols-2 grid-cols-1 gap-2">
           {filteredPRs.map((pr) => (
             <div className={"flex flex-col gap-2"} key={pr.id}>
-              {PRCard(pr)}
+              <PRCard
+                pr={pr}
+                refreshingPR={refreshingPR}
+                refreshPR={refreshPR}
+              />
             </div>
           ))}
         </div>
