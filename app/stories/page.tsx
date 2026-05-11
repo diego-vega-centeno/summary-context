@@ -1,8 +1,13 @@
 "use client";
 import { type TrackedPRWithSummary, type PRStatus } from "@/types/index";
 import { Plus, Clock } from "lucide-react";
-import { useMemo, useState } from "react";
-import { status_data, prs, formatRelativeDate } from "@/lib/data/status-data";
+import { useEffect, useMemo, useState } from "react";
+import {
+  status_data,
+  prs,
+  formatRelativeDate,
+  useDebounce,
+} from "@/lib/data/status-data";
 import { dummyPRs } from "@/lib/data/dummy-data";
 
 const status = ["total", "open", "stale", "merged", "closed"];
@@ -42,11 +47,12 @@ export default function Page() {
   const [statusSelected, setStatusSelected] = useState<PRStatus | "total">(
     "total",
   );
+  const debouncedSearchInput = useDebounce(searchInput, 300);
 
   const filteredPRs = useMemo(() => {
     let basePRs = statusSelected === "total" ? dummyPRs : prs[statusSelected];
-    if (searchInput) {
-      const query = searchInput.trim().toLowerCase();
+    if (debouncedSearchInput) {
+      const query = debouncedSearchInput.trim().toLowerCase();
       return basePRs.filter(
         (pr) =>
           pr.title.toLowerCase().includes(query) ||
@@ -56,16 +62,12 @@ export default function Page() {
       );
     }
     return basePRs;
-  }, [statusSelected, searchInput]);
+  }, [statusSelected, debouncedSearchInput]);
 
   async function refreshPRs() {
     setRefreshing(true);
     await new Promise((r) => setTimeout(r, 2000));
     setRefreshing(false);
-  }
-
-  function handleStatusSelection(status: PRStatus | "total") {
-    setStatusSelected(status);
   }
 
   return (
@@ -100,7 +102,7 @@ export default function Page() {
             <div
               className={`flex items-center gap-2 px-2 rounded-xl text-sm hover:cursor-pointer border-1 border-border font-semibold ${statusSelected === status ? "bg-white text-black" : "hover:bg-hover hover:text-white text-muted-foreground"}`}
               key={status}
-              onClick={() => handleStatusSelection(status as PRStatus)}
+              onClick={() => setStatusSelected(status as PRStatus)}
             >
               <span>{status}</span>
               <div className="inline-flex items-center justify-center rounded-full bg-muted-background w-6 h-6 text-white text-xs ml-2">
