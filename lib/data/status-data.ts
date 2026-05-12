@@ -6,7 +6,6 @@ import {
 } from "lucide-react";
 import { type PRStatus } from "@/types/index";
 import { getPRsByStatus, dummyPRs } from "@/lib/data/dummy-data";
-import { useEffect, useState } from "react";
 
 const prs = {
   open: getPRsByStatus("open"),
@@ -68,13 +67,4 @@ function formatRelativeDate(dateStr: string): string {
   return `${Math.floor(diffDays / 30)}mo ago`;
 }
 
-function useDebounce(value: string, delay: number) {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-  useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delay);
-    return () => clearTimeout(timer);
-  }, [value, delay]);
-  return debouncedValue;
-}
-
-export { status_data, prs, formatRelativeDate, useDebounce };
+export { status_data, prs, formatRelativeDate };
