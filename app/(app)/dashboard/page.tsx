@@ -9,7 +9,7 @@ function StatsCard({ status }: { status: PRStatus | "total" }) {
   const IconComponent = status_data[status].icon;
   return (
     <div
-      className={`p-3 border-1 border-border rounded-lg flex items-center gap-2`}
+      className={`p-3 border border-border rounded-lg flex items-center gap-2`}
     >
       <div className="w-2/3">
         <div className="text-lg text-muted-foreground">
@@ -18,7 +18,7 @@ function StatsCard({ status }: { status: PRStatus | "total" }) {
         <div className="text-xl">{status_data[status].length}</div>
       </div>
       <div
-        className={`w-10 h-10 flex items-center justify-center ${status_data[status].color} bg-muted-background rounded-xl bg-border`}
+        className={`w-10 h-10 flex items-center justify-center ${status_data[status].color} bg-muted-background rounded-xl`}
       >
         {<IconComponent className="w-1/2 h-1/2" />}
       </div>
@@ -31,7 +31,7 @@ function PRMiniCard(pr: TrackedPRWithSummary) {
     <Link
       href={`stories/${pr.id}`}
       key={pr.id}
-      className="text-sm border-1 border-border rounded-lg p-3 hover:bg-hover hover:cursor-pointer"
+      className="text-sm border border-border rounded-lg p-3 hover:bg-hover hover:cursor-pointer"
     >
       <div className="font-medium text-foreground">{pr.title}</div>
       <div className="text-muted-foreground pb-2">
@@ -74,7 +74,7 @@ export default function Page() {
             <div className={"flex flex-col gap-2"} key={status}>
               <div className="py-2">
                 <div
-                  className={`inline-block border-1 rounded-xl ${status_data[status as PRStatus].color} px-3 py-1 text-sm`}
+                  className={`inline-block border rounded-xl ${status_data[status as PRStatus].color} px-3 py-1 text-sm`}
                 >
                   {status}
                 </div>

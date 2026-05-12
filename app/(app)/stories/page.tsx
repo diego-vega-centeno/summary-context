@@ -18,7 +18,7 @@ export default function Page() {
   const debouncedSearchInput = useDebounce(searchInput, 300);
 
   const filteredPRs = useMemo(() => {
-    let basePRs = statusSelected === "total" ? dummyPRs : prs[statusSelected];
+    const basePRs = statusSelected === "total" ? dummyPRs : prs[statusSelected];
     if (debouncedSearchInput) {
       const query = debouncedSearchInput.trim().toLowerCase();
       return basePRs.filter(
