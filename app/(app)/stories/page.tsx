@@ -2,7 +2,8 @@
 import { type PRStatus } from "@/types/index";
 import { Plus } from "lucide-react";
 import { useMemo, useState } from "react";
-import { status_data, prs, useDebounce } from "@/lib/data/status-data";
+import { status_data, prs } from "@/lib/data/status-data";
+import { useDebounce } from "@/lib/data/hooks/use-debounce";
 import { dummyPRs } from "@/lib/data/dummy-data";
 import PRCard from "@/components/ui/PRCard";
 
