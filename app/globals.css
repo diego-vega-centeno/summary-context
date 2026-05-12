@@ -4,7 +4,7 @@
 :root {
   --background: #ededed;
   --foreground: #0a0a0a;
-  --highlight: #a9a3a3;
+  --highlight: #a9a3a382;
   --primary: #0a0917;
   --secondary: #262626;
   --muted-background: #c2bdbd;
@@ -19,7 +19,7 @@
 .dark {
   --background: #0a0a0a;
   --foreground: #ededed;
-  --highlight: #5e5b5b;
+  --highlight: #5e5b5b85;
   --primary: #0a0917;
   --secondary: #262626;
   --muted-background: #262626;
