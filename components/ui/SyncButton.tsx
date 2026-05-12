@@ -2,7 +2,7 @@
 import { RefreshCw } from "lucide-react";
 import { useState } from "react";
 
-export default function SyncButton({ text }) {
+export default function SyncButton({ text }: { text: string }) {
   const [refreshing, setRefreshing] = useState(false);
 
   async function refreshPRs() {
@@ -17,7 +17,9 @@ export default function SyncButton({ text }) {
       disabled={refreshing}
       onClick={refreshPRs}
     >
-      <RefreshCw className={`w-4 h-4 mr-2 ${refreshing ? "animate-spin" : ""}`} />
+      <RefreshCw
+        className={`w-4 h-4 mr-2 ${refreshing ? "animate-spin" : ""}`}
+      />
       {text}
     </button>
   );
