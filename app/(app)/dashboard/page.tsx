@@ -1,6 +1,7 @@
 import { status_data, prs } from "@/lib/data/status-data";
 import { type TrackedPRWithSummary, type PRStatus } from "@/types/index";
 import SyncButton from "@/components/ui/SyncButton";
+import Link from "next/link";
 
 const columns = ["open", "stale", "merged", "closed"];
 
@@ -27,7 +28,8 @@ function StatsCard({ status }: { status: PRStatus | "total" }) {
 
 function PRMiniCard(pr: TrackedPRWithSummary) {
   return (
-    <div
+    <Link
+      href={`stories/${pr.id}`}
       key={pr.id}
       className="text-sm border-1 border-border rounded-lg p-3 hover:bg-hover hover:cursor-pointer"
     >
@@ -35,11 +37,9 @@ function PRMiniCard(pr: TrackedPRWithSummary) {
       <div className="text-muted-foreground pb-2">
         <div className="pt-2">{`#${pr.pr_number} - ${pr.repo_name}`}</div>
       </div>
-      <hr className="" />
-      <div className="text-muted-foreground pt-2">
-        {pr.summary?.summary_json.current_state}
-      </div>
-    </div>
+      <hr className="border-border" />
+      <div className="pt-2">{pr.summary?.summary_json.current_state}</div>
+    </Link>
   );
 }
 
@@ -54,7 +54,7 @@ export default function Page() {
             </h1>
             <h2 className="text-muted-foreground text-sm">Last synced</h2>
           </div>
-          <SyncButton text='Sync all' />
+          <SyncButton text="Sync all" />
         </div>
         <div className="grid md:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] grid-cols-2 gap-2">
           {["total", ...columns].map((status) => (
