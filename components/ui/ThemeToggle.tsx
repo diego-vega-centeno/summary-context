@@ -34,7 +34,7 @@ export function ThemeToggle({
         />
       ) : (
         <Sun
-          className="h-5 w-5 p-1 rounded-full hover:bg-foreground hover:text-background hover:cursor-pointer"
+          className="h-7 w-7 p-1 rounded-full hover:bg-foreground hover:text-background hover:cursor-pointer"
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         />
       )}
