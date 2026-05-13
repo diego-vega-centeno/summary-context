@@ -4,6 +4,7 @@ import { dummyPRs } from "@/lib/data/dummy-data";
 import SyncButton from "@/components/ui/SyncButton";
 import { formatRelativeDate } from "@/lib/data/utils";
 import PRMainSection from "@/components/ui/PRMainSection";
+import StorySection from "@/components/ui/StorySection";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -43,6 +44,7 @@ export default async function StoryPage({ params }: Props) {
         <div className="w-full flex justify-center">
           <PRMainSection pr={pr} />
         </div>
+        <StorySection />
       </div>
     </div>
   );
