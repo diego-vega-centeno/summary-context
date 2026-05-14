@@ -18,7 +18,7 @@ function StatsCard({ status }: { status: PRStatus | "total" }) {
         <div className="text-xl">{status_data[status].length}</div>
       </div>
       <div
-        className={`w-10 h-10 flex items-center justify-center ${status_data[status].color} bg-muted-background rounded-xl`}
+        className={`w-10 h-10 flex items-center justify-center ${status_data[status].color} rounded-xl`}
       >
         {<IconComponent className="w-1/2 h-1/2" />}
       </div>
