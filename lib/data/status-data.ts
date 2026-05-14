@@ -24,31 +24,31 @@ const status_data: Record<
   }
 > = {
   total: {
-    title: "total",
+    title: "Total tracked",
     icon: GitPullRequest,
     color: "bg-gray-700/50 dark:bg-gray-700 border-gray-700",
     length: dummyPRs.length,
   },
   open: {
-    title: "open",
+    title: "Open",
     icon: GitPullRequest,
     color: "bg-green-700/50 dark:bg-green-700 border-green-700",
     length: prs["open"].length,
   },
   merged: {
-    title: "merged",
+    title: "Merged",
     icon: GitMerge,
     color: "bg-purple-700/50 dark:bg-purple-700 border-purple-700",
     length: prs["merged"].length,
   },
   closed: {
-    title: "closed",
+    title: "Closed",
     icon: SquareDot,
     color: "bg-zinc-700/50  dark:bg-zinc-600 border-zinc-600",
     length: prs["closed"].length,
   },
   stale: {
-    title: "stale",
+    title: "Stale",
     icon: TriangleAlert,
     color: "bg-yellow-700/50 dark:bg-yellow-700 border-yellow-700",
     length: prs["stale"].length,
