@@ -146,7 +146,7 @@ export default async function StoryPage({ params }: Props) {
         <StorySection
           title="Current state"
           icon={<Activity className="h-4 w-4" />}
-          accent="bg-zinc-900 text-foreground"
+          accent="bg-muted-background text-foreground"
         >
           <p className="text-sm text-muted-foreground">
             {pr.summary?.summary_json.current_state}
@@ -155,7 +155,7 @@ export default async function StoryPage({ params }: Props) {
         <StorySection
           title={`Suggested next steps (${pr.summary?.summary_json.next_steps.length})`}
           icon={<ListChecks className="h-4 w-4" />}
-          accent="bg-green-100 dark:bg-green-950 text-green-600 dark:text-green-400"
+          accent="bg-green-200 dark:bg-green-950 text-green-600 dark:text-green-400"
         >
           {pr.summary?.summary_json.next_steps.length === 0 ? (
             <p className="text-sm text-muted-foreground">
