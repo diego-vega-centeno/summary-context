@@ -40,7 +40,9 @@ export default function StorySection({
           <div>{isOpen ? <ChevronDown /> : <ChevronRight />}</div>
         </div>
       </Collapsible.Trigger>
-      <Collapsible.Content>
+      <Collapsible.Content
+        className={`overflow-hidden ${isOpen ? "animate-collapsible-down" : "animate-collapsible-up"}`}
+      >
         <div
           className={`px-5 py-4 border border-border rounded-lg ${isOpen ? "border-t-0 rounded-t-none" : ""}`}
         >
