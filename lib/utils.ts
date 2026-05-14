@@ -1,3 +1,6 @@
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
 function formatRelativeDate(dateStr: string): string {
   const date = new Date(dateStr);
   const now = new Date();
@@ -10,4 +13,8 @@ function formatRelativeDate(dateStr: string): string {
   return `${Math.floor(diffDays / 30)}mo ago`;
 }
 
-export { formatRelativeDate };
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+export { formatRelativeDate, cn };

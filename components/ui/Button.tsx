@@ -1,6 +1,7 @@
 import { cva } from "class-variance-authority";
 import type { VariantProps } from "class-variance-authority";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center hover:cursor-pointer rounded-md",
@@ -50,13 +51,15 @@ export default function Button({
   href,
   ...props
 }: ButtonProps) {
-  const _className = buttonVariants({
-    variant,
-    size,
+  const _className = cn(
+    buttonVariants({
+      variant,
+      size,
+      border,
+      disabled,
+    }),
     className,
-    border,
-    disabled,
-  });
+  );
 
   if (href) {
     return (
