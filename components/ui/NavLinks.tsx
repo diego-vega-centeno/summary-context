@@ -1,5 +1,6 @@
 import Button from "@/components/ui/Button";
 import { LayoutDashboard, BookOpenText } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const links = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -7,6 +8,7 @@ const links = [
 ];
 
 export default function NavLinks() {
+  const pathname = usePathname();
   return (
     <div className="flex flex-col gap-1">
       {links.map((link) => {
@@ -14,8 +16,9 @@ export default function NavLinks() {
           <Button
             key={link.name}
             href={link.href}
-            variant={'withIcon'}
+            variant={"withIcon"}
             icon={link.icon}
+            className={pathname === link.href ? "bg-highlight" : ""}
           >
             {link.name}
           </Button>
