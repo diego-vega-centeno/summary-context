@@ -3,6 +3,7 @@
 import Button from "@/components/ui/Button";
 import { useState } from "react";
 import { LoaderCircle } from "lucide-react";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,6 +16,10 @@ export default function LoginPage() {
     await new Promise((r) => setTimeout(r, 1000));
     setLoading(false);
   }
+
+  const GoogleIcon = () => (
+    <Image src="/google-icon.svg" alt="Google" width={20} height={20} />
+  );
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -54,7 +59,9 @@ export default function LoginPage() {
               />
             </div>
             <Button className="w-full" type="submit" disabled={loading}>
-              {loading && <LoaderCircle className="h-4 w-4 mr-2 animate-spin" />}
+              {loading && (
+                <LoaderCircle className="h-4 w-4 mr-2 animate-spin" />
+              )}
               Sign in
             </Button>
           </form>
@@ -66,10 +73,21 @@ export default function LoginPage() {
           </a>
         </div>
         <div className="relative">
-          <hr className="border-border" />
+          <hr className="/border-border h-6" />
           <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-8 bg-background">
             or
           </div>
+        </div>
+        <div>
+          <Button
+            variant={"withIcon"}
+            icon={GoogleIcon}
+            disabled={loading}
+            className="w-full flex items-center justify-center bg-muted-background p-5"
+          >
+            {loading && <LoaderCircle className="h-4 w-4 mr-2 animate-spin" />}
+            Sign in with Google
+          </Button>
         </div>
       </div>
     </div>
