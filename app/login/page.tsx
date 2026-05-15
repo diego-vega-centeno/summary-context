@@ -82,8 +82,8 @@ export default function LoginPage() {
           <Button
             variant={"withIcon"}
             icon={GoogleIcon}
-            disabled={loading}
-            className="w-full flex items-center justify-center bg-muted-background p-5"
+            href={"/oauth/google"}
+            className="w-full flex items-center justify-center bg-muted-background p-2"
           >
             Sign in with Google
           </Button>
