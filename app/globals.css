@@ -14,6 +14,7 @@
   --border: #00000053;
   --warning: #be1a1a;
   --hover: #a9a3a39d;
+  --ring: #a1a1a1;
 }
 
 .dark {
@@ -29,6 +30,7 @@
   --sidebar-foreground: #262626;
   --warning: #be1a1a;
   --hover: #a9a3a326;
+  --ring: #a1a1a1;
 }
 
 @theme {
@@ -45,6 +47,7 @@
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-warning: var(--warning);
   --color-hover: var(--hover);
+  --color-ring: var(--ring);
 }
 
 body {
