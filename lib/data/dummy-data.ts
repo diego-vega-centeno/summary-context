@@ -1,5 +1,15 @@
 import { TrackedPRWithSummary } from "@/types/index";
 
+export const users = [
+  {
+    id: '7f759600-988e-4a81-9878-439523293021',
+    oauth_id: '-',
+    name: 'User',
+    email: 'user@nextmail.com',
+    password: '123456',
+  },
+];
+
 // Dummy data — 8 PRs: open (3), merged (2), closed (1), stale (2)
 
 export const dummyPRs: TrackedPRWithSummary[] = [
