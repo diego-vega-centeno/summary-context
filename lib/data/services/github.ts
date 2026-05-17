@@ -1,0 +1,1 @@
+// API authentication, rate limiting, and mapping GitHub's response to your internal types.
