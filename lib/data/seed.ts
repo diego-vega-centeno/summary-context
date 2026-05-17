@@ -3,9 +3,7 @@ import postgres from "postgres";
 import { dummyPRs, users } from "@/lib/data/dummy-data";
 
 // for local postgreSQL
-const sql = postgres(
-  "postgresql://postgres:elefant4@localhost:5432/summary-context",
-);
+import sql from "../db";
 
 async function seedUsers() {
   await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
