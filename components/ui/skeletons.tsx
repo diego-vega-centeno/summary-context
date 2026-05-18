@@ -4,7 +4,7 @@ import { PRStatus } from "@/types";
 const columns: PRStatus[] = ["open", "stale", "merged", "closed"];
 const shimmer = "before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-gray-500/20 before:to-transparent";
 
-export async function DashboardStatusSkeleton() {
+export function DashboardStatusSkeleton() {
   return (
     <>
       <h2 className="pt-8 max-w-xs text-3xl font-semibold leading-10 tracking-tight">
