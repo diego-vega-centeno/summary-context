@@ -9,7 +9,7 @@ async function fetchTrackedPRs(
 ): Promise<TrackedPRWithSummary[]> {
   try {
     logger.info("Fetching data...");
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
     const prs = await sql<TrackedPRWithSummary[]>`
       SELECT
         p.*,
@@ -31,6 +31,8 @@ async function fetchTrackedPRs(
 }
 
 async function fetchStatusCounts(userId: string) {
+  // await new Promise((resolve) => setTimeout(resolve, 3000));
+
   return await sql`
     SELECT status, count(*)::int
       FROM tracked_prs
