@@ -8,16 +8,18 @@ async function fetchTrackedPRs(
   userId: string,
 ): Promise<TrackedPRWithSummary[]> {
   try {
-    logger.info("Fetching revenue data...");
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    logger.info("Fetching data...");
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const prs = await sql<TrackedPRWithSummary[]>`
       SELECT
         p.*,
-        s.id as "summary.id",
-        s.summary_json as "summary.summary_json",
-        s.generated_at as "summary.generated_at"
-      FROM tracked_prs p
+        json_build_object(
+          'id', s.id,
+          'summary_json', s.summary_json,
+          'generated_at', s.generated_at
+        ) as summary
+      FROM tracked_prs  p
       LEFT JOIN pr_summaries s ON p.id = s.pr_id
       WHERE user_id=${userId}
     `;
