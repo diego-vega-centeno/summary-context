@@ -10,15 +10,11 @@ export default async function DashboardCount() {
     "7f759600-988e-4a81-9878-439523293021",
   );
   const countMap: Partial<Record<PRStatus | "total", string>> = {};
-  let totalCount = 0;
-
   statusCounts.forEach((pr) => {
     if (columns.includes(pr.status)) {
       countMap[pr.status as PRStatus | "total"] = pr.count;
-      totalCount += pr.count;
     }
   });
-  countMap["total"] = totalCount.toString();
 
   return (
     <>

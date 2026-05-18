@@ -34,10 +34,12 @@ async function fetchStatusCounts(userId: string) {
   // await new Promise((resolve) => setTimeout(resolve, 3000));
 
   return await sql`
-    SELECT status, count(*)::int
-      FROM tracked_prs
+    SELECT status::text, count(*)::int FROM tracked_prs
     WHERE user_id = ${userId}
     GROUP BY status
+    UNION
+    SELECT 'total', count(*)::int FROM tracked_prs
+    WHERE user_id = ${userId}
   `;
 }
 
