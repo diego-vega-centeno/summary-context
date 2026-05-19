@@ -1,4 +1,4 @@
-import { fetchTrackedPRs } from "@/lib/data/prs";
+import { fetchDashboardPRs } from "@/lib/data/prs";
 import { statusConfig } from "@/lib/data/status-data";
 import { PRStatus } from "@/types";
 import PRMiniCard from "./PRMiniCard";
@@ -7,13 +7,13 @@ const columns: PRStatus[] = ["open", "stale", "merged", "closed"];
 
 export default async function DashboardStatus() {
   const userId = "7f759600-988e-4a81-9878-439523293021";
-  const trackedPRs = await fetchTrackedPRs(userId);
+  const dashboardPRs = await fetchDashboardPRs(userId);
 
   const prs = {
-    open: trackedPRs.filter((pr) => pr.status === "open"),
-    merged: trackedPRs.filter((pr) => pr.status === "merged"),
-    closed: trackedPRs.filter((pr) => pr.status === "closed"),
-    stale: trackedPRs.filter((pr) => pr.status === "stale"),
+    open: dashboardPRs.filter((pr) => pr.status === "open"),
+    merged: dashboardPRs.filter((pr) => pr.status === "merged"),
+    closed: dashboardPRs.filter((pr) => pr.status === "closed"),
+    stale: dashboardPRs.filter((pr) => pr.status === "stale"),
   };
 
   return (

@@ -1,7 +1,7 @@
-import { TrackedPRWithSummary } from "@/types";
+import { PRMiniCardType } from "@/types";
 import Link from "next/link";
 
-export default function PRMiniCard({ pr }: { pr: TrackedPRWithSummary }) {
+export default function PRMiniCard({ pr }: { pr: PRMiniCardType }) {
   return (
     <Link
       href={`stories/${pr.id}`}
@@ -12,7 +12,7 @@ export default function PRMiniCard({ pr }: { pr: TrackedPRWithSummary }) {
         <div className="pt-2">{`#${pr.pr_number} - ${pr.repo_name}`}</div>
       </div>
       <hr className="border-border" />
-      <div className="pt-2">{pr.summary?.summary_json.current_state}</div>
+      <div className="pt-2">{pr.current_state}</div>
     </Link>
   );
 }
