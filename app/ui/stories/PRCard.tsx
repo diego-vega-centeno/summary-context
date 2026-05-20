@@ -1,6 +1,6 @@
 import { type PRDashboardType } from "@/types/index";
 import { Clock, RefreshCw } from "lucide-react";
-import { status_data } from "@/lib/data/status-data";
+import { statusConfig } from "@/lib/data/status-data";
 import { formatRelativeDate } from "@/lib/utils";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ interface PRCardProps {
 }
 
 export default function PRCard({ pr, refreshingPR, refreshPR }: PRCardProps) {
-  const IconComponent = status_data[pr.status].icon;
+  const IconComponent = statusConfig[pr.status].icon;
   return (
     <Link href={`stories/${pr.id}`}>
       <div
@@ -20,7 +20,7 @@ export default function PRCard({ pr, refreshingPR, refreshPR }: PRCardProps) {
       >
         <div className="flex justify-between">
           <div
-            className={`inline-flex items-center border-1 rounded-xl ${status_data[pr.status].color} px-2 mb-2 text-sm`}
+            className={`inline-flex items-center border-1 rounded-xl ${statusConfig[pr.status].color} px-2 mb-2 text-sm`}
           >
             <IconComponent className="inline-block w-6 pr-2" />
             <span>{pr.status}</span>
