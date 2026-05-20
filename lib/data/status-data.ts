@@ -5,7 +5,6 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import { type PRStatus } from "@/types/index";
-import { getPRsByStatus, dummyPRs } from "@/lib/data/dummy-data";
 
 const statusConfig: Record<
   PRStatus | "total",
