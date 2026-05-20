@@ -1,6 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import { formatRelativeDate } from "@/lib/utils";
-import { status_data } from "@/lib/data/status-data";
+import { statusConfig } from "@/lib/data/status-data";
 import { type TrackedPRWithSummary } from "@/types/index";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ export default function PRMainSection({ pr }: { pr: TrackedPRWithSummary }) {
       <div className="flex justify-between text-sm items-center py-2">
         <div className="flex gap-2 items-center">
           <div
-            className={`inline-block border-1 rounded-xl ${status_data[pr.status].color} px-3 py-1 text-xs`}
+            className={`inline-block border-1 rounded-xl ${statusConfig[pr.status].color} px-3 py-1 text-xs`}
           >
             {pr.status}
           </div>
