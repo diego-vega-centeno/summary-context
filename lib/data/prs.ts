@@ -30,9 +30,7 @@ async function fetchTrackedPRs(
   }
 }
 
-async function fetchDashboardPRs(
-  userId: string,
-): Promise<PRDashboardType[]> {
+async function fetchDashboardPRs(userId: string): Promise<PRDashboardType[]> {
   try {
     logger.info("Fetching data...");
     await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -72,8 +70,27 @@ async function fetchStatusCounts(userId: string) {
   `;
 }
 
-async function fetchPRById(id: string) {}
+async function fetchPRStoryById(id: string) {
+  const data = await sql<TrackedPRWithSummary[]>`
+    SELECT
+      p.*,
+      json_build_object(
+        'id', s.id,
+        'summary_json', s.summary_json,
+        'generated_at', s.generated_at
+      ) as summary
+    FROM tracked_prs p
+    LEFT JOIN pr_summaries s ON p.id = s.pr_id
+    WHERE p.id = ${id} 
+  `;
+  return data[0];
+}
 
 async function fetchPRSummary(prId: string) {}
 
-export { fetchTrackedPRs, fetchStatusCounts, fetchDashboardPRs };
+export {
+  fetchTrackedPRs,
+  fetchStatusCounts,
+  fetchDashboardPRs,
+  fetchPRStoryById,
+};
